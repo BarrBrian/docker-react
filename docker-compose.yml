@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build:
+      # the folder that holds all the files for your project
+      context: .
+      # the file to be used to build the image for this service
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - .:/app
