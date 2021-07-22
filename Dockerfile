@@ -10,7 +10,6 @@ COPY . .
 # What would be the difference between using RUN and CMD here?
 RUN npm run build
 
-
 # Run Phase - by adding another FROM statement, we automatically signal the first phase is complete
 # Note: AWS might have issues with named builders
 # See alternative synatax: https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/22538182#overview
