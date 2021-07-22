@@ -11,3 +11,13 @@ services:
     volumes:
       - /app/node_modules
       - .:/app
+  # essentially the same as the web service, but with the startup command overridden
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    # overrides the Startup Command specified in the Dockerfile.dev
+    command: ['npm', 'run', 'test']
