@@ -32,6 +32,6 @@ deploy:
   ## here we are only deploying when code is updated in the master branch
   on:
     branch: master
-# AWS credentials are stored in TravisCI env variables
-access_key_id: $AWS_ACCESS_KEY
-secret_access_key: $AWS_SECRET_KEY
+  # AWS credentials are stored in TravisCI env variables
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
