@@ -1,9 +1,9 @@
 sudo: required
-services: 
+services:
   - docker
 
-before_install: 
+before_install:
   - docker build -t brianbarr/docker-react -f Dockerfile.dev .
 
-  script:
-    - docker run -e CI=true brianbarr/docker-react npm run test
+script:
+  - docker run -e CI=true brianbarr/docker-react npm run test
