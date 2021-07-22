@@ -1,11 +1,37 @@
+# superuser privledges are always required for docker
 sudo: required
 language: generic
 
 services:
+  # what services are needed to test and deploy this application
   - docker
 
 before_install:
+  # before running the TravisCI processes, build the latest image
+  ## you want to tag it with a name so you can easily reference it in the script
   - docker build -t brianbarr/docker-react -f Dockerfile.dev .
 
-  script:
+script:
+  # script to run every time the Travis job is triggered
   - docker run -e CI=true brianbarr/docker-react npm run test
+
+deploy:
+  # TravisCI is preconfigured to work with some services
+  provider: elasticbeanstalk
+  # the AWS region your app is hosted in
+  region: 'us-east-2'
+  # the name of your EBS app
+  app: 'docker-react'
+  # the name of the EBS env within that app
+  env: 'Dockerreact-env'
+  # the S3 bucket where your code is hosted
+  bucket_name: 'elasticbeanstalk-us-east-2-308385786692'
+  # the directory inside that bucket where your code is hosted
+  bucket_path: 'docker-react'
+  # tells us when to deploy
+  ## here we are only deploying when code is updated in the master branch
+  on:
+    branch: master
+# AWS credentials are stored in TravisCI env variables
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_KEY
